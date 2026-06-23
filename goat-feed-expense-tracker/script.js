@@ -55,21 +55,42 @@ function addBalance() {
 function addExpense() {
 
     resetErrors();
-    addFeedType(feed);
+    
 
+    resetErrors();
+    
     let date = document.getElementById("date").value;
     let feed = document.getElementById("feed").value;
     let quantity = document.getElementById("quantity").value;
     let amount = document.getElementById("amount").value;
     let payment = document.getElementById("payment").value;
-
+    
+    if (!date) {
+        showError("date");
+        return;
+    }
+    
+    if (!feed) {
+        showError("feed");
+        return;
+    }
+    
+    if (!amount) {
+        showError("amount");
+        return;
+    }
+    
+    if (!payment) {
+        showError("payment");
+        return;
+    }
     // if (!date) return showError("date"), alert("Please fill required fields!");
     // if (!feed) return showError("feed"), alert("Please fill required fields!");
     // if (!quantity) return showError("quantity"), alert("Please fill required fields!");
     // if (!amount) return showError("amount"), alert("Please fill required fields!");
     // if (!payment) return showError("payment"), alert("Please fill required fields!");
-
-    resetErrors();
+    addFeedType(feed);
+    // resetErrors();
 
     if (!date) return showError("date");
     if (!feed) return showError("feed");
