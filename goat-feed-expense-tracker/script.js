@@ -73,7 +73,6 @@ function addExpense() {
 
     if (!date) return showError("date");
     if (!feed) return showError("feed");
-    // if (!quantity) return showError("quantity");
     if (!amount) return showError("amount");
     if (!payment) return showError("payment");
 
