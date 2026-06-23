@@ -81,15 +81,20 @@
 
             <input type="date" id="date">
 
-            <select id="feed">
-                <option>Grass</option>
-                <option>Lucerne</option>
-                <option>Dana</option>
-                <option>Gandum Ka Daliya</option>
-                <option>Tori</option>
-                <option>Chokar</option>
-                <option>Khul</option>
-            </select>
+            <input type="text"
+               id="feed"
+               list="feedTypes"
+               placeholder="Feed Type">
+
+            <datalist id="feedTypes">
+                <option value="Grass">
+                <option value="Lucerne">
+                <option value="Dana">
+                <option value="Gandum Ka Daliya">
+                <option value="Tori">
+                <option value="Chokar">
+                <option value="Khul">
+            </datalist>
 
             <input type="number"
                    id="quantity"
