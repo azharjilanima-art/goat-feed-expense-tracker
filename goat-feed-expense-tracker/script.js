@@ -55,47 +55,34 @@ function addBalance() {
 function addExpense() {
 
     resetErrors();
-    
 
-    resetErrors();
-    
     let date = document.getElementById("date").value;
     let feed = document.getElementById("feed").value;
     let quantity = document.getElementById("quantity").value;
     let amount = document.getElementById("amount").value;
     let payment = document.getElementById("payment").value;
-    
+
     if (!date) {
         showError("date");
         return;
     }
-    
+
     if (!feed) {
         showError("feed");
         return;
     }
-    
+
     if (!amount) {
         showError("amount");
         return;
     }
-    
+
     if (!payment) {
         showError("payment");
         return;
     }
-    // if (!date) return showError("date"), alert("Please fill required fields!");
-    // if (!feed) return showError("feed"), alert("Please fill required fields!");
-    // if (!quantity) return showError("quantity"), alert("Please fill required fields!");
-    // if (!amount) return showError("amount"), alert("Please fill required fields!");
-    // if (!payment) return showError("payment"), alert("Please fill required fields!");
-    addFeedType(feed);
-    // resetErrors();
 
-    if (!date) return showError("date");
-    if (!feed) return showError("feed");
-    if (!amount) return showError("amount");
-    if (!payment) return showError("payment");
+    addFeedType(feed);
 
     let expense = {
         date,
@@ -105,36 +92,38 @@ function addExpense() {
         payment
     };
 
-    /* EDIT MODE */
     if (editIndex >= 0) {
 
         let old = expenses[editIndex];
 
-        if (old.payment === "Cash") cashBalance += old.amount;
-        else onlineBalance += old.amount;
+        if (old.payment === "Cash")
+            cashBalance += old.amount;
+        else
+            onlineBalance += old.amount;
 
         expenses[editIndex] = expense;
         editIndex = -1;
 
     } else {
+
         expenses.push(expense);
+
     }
 
-    /* Deduct new */
-    if (expense.payment === "Cash") cashBalance -= expense.amount;
-    else onlineBalance -= expense.amount;
+    if (expense.payment === "Cash")
+        cashBalance -= expense.amount;
+    else
+        onlineBalance -= expense.amount;
 
     saveData();
     updateUI();
 
-    /* CLEAR FORM */
     document.getElementById("date").value = getTodayDate();
+    document.getElementById("feed").value = "";
     document.getElementById("quantity").value = "";
     document.getElementById("amount").value = "";
-    document.getElementById("feed").value = "";
     document.getElementById("payment").selectedIndex = 0;
 }
-
 /* ---------------- EDIT ---------------- */
 function editExpense(index) {
 
@@ -293,15 +282,6 @@ function clearAll() {
     updateUI();
 }
 
-document.addEventListener("keydown", function(event){
-    if(event.key === "Enter"){
-        if(document.activeElement.tagName === "INPUT" ||
-           document.activeElement.tagName === "SELECT"){
-            addExpense();
-        }
-    }
-});
-
 const fields = ["date","feed","quantity","amount","payment"];
 
 fields.forEach((id, index) => {
@@ -354,6 +334,9 @@ function loadFeedTypes() {
     ];
 
     let datalist = document.getElementById("feedTypes");
+
+    if (!datalist) return;
+    
     datalist.innerHTML = "";
 
     feedTypes.forEach(type => {
