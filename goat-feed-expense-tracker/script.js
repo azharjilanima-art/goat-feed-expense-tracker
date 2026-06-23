@@ -73,14 +73,14 @@ function addExpense() {
 
     if (!date) return showError("date");
     if (!feed) return showError("feed");
-    if (!quantity) return showError("quantity");
+    // if (!quantity) return showError("quantity");
     if (!amount) return showError("amount");
     if (!payment) return showError("payment");
 
     let expense = {
         date,
         feed,
-        quantity,
+        quantity: quantity || "-",
         amount: Number(amount),
         payment
     };
