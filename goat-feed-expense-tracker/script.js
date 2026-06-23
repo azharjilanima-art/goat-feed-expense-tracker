@@ -23,7 +23,7 @@ function saveData() {
 
 /* ---------------- RESET ERRORS ---------------- */
 function resetErrors() {
-    ["date", "feed", "quantity", "amount", "payment"].forEach(id => {
+    ["date", "feed", "amount", "payment"].forEach(id => {
         document.getElementById(id).style.border = "none";
     });
 }
