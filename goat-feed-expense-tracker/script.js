@@ -55,6 +55,7 @@ function addBalance() {
 function addExpense() {
 
     resetErrors();
+    addFeedType(feed);
 
     let date = document.getElementById("date").value;
     let feed = document.getElementById("feed").value;
@@ -110,7 +111,7 @@ function addExpense() {
     document.getElementById("date").value = getTodayDate();
     document.getElementById("quantity").value = "";
     document.getElementById("amount").value = "";
-    document.getElementById("feed").selectedIndex = 0;
+    document.getElementById("feed").value = "";
     document.getElementById("payment").selectedIndex = 0;
 }
 
@@ -299,6 +300,48 @@ fields.forEach((id, index) => {
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js");
 }
+
+/* ---------------- ADD FEED TYPE ---------------- */
+function addFeedType(feedName) {
+
+    let feedTypes = JSON.parse(localStorage.getItem("feedTypes")) || [
+        "Grass",
+        "Lucerne",
+        "Dana",
+        "Gandum Ka Daliya",
+        "Tori",
+        "Chokar",
+        "Khul"
+    ];
+
+    if (!feedTypes.includes(feedName)) {
+        feedTypes.push(feedName);
+        localStorage.setItem("feedTypes", JSON.stringify(feedTypes));
+    }
+}
+
+/* ---------------- LOAD FEED TYPES ---------------- */
+function loadFeedTypes() {
+
+    let feedTypes = JSON.parse(localStorage.getItem("feedTypes")) || [
+        "Grass",
+        "Lucerne",
+        "Dana",
+        "Gandum Ka Daliya",
+        "Tori",
+        "Chokar",
+        "Khul"
+    ];
+
+    let datalist = document.getElementById("feedTypes");
+    datalist.innerHTML = "";
+
+    feedTypes.forEach(type => {
+        datalist.innerHTML += `<option value="${type}">`;
+    });
+}
+
+loadFeedTypes();
 
 /* ---------------- INIT ---------------- */
 document.getElementById("date").value = getTodayDate();
